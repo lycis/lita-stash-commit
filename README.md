@@ -1,6 +1,6 @@
 # lita-stash-commit
 
-TODO: Add a description of the plugin.
+Write pushes to chat from Atlassian Stash post-receive POST hook.
 
 ## Installation
 
@@ -12,8 +12,7 @@ gem "lita-stash-commit"
 
 ## Configuration
 
-TODO: Describe any configuration attributes the plugin exposes.
+none
 
 ## Usage
 
-TODO: Describe the plugin's features and how to use them.
