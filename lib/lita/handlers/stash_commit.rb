@@ -6,7 +6,8 @@ module Lita
       http.post "/stash-post-receive", :receive
 
       def receive(request, response)
-        room = request.params['room']
+	room = request.params['room']
+        Lita.logger.debug("stash-post-receive: room = #{room}")
         target = Source.new(room: room)
         json_data = parse_json(request.body.read) or return
         message = format_message(json_data)
@@ -22,9 +23,9 @@ module Lita
          csValues = json['changesets']['values']
          changes = ""
          csValues.each do |value|
-           changes << " #{value['toCommit']['displayId']} by #{value['toCommit']['author']['name']}: #{value['toCommit']['message']}\n"
+           changes << "+ [#{value['toCommit']['displayId']}, #{value['toCommit']['author']['name']}] #{value['toCommit']['message']}\n"
          end
-        return "push to #{repo}\n#{changes}"
+        return "[Stash] Changes @ #{repo}\n#{changes}"
       end
 
       Lita.register_handler(self)
